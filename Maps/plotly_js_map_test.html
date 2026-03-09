@@ -68,7 +68,7 @@ https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Y
 
 <body>
 
-    <div class="container" style="max-width:640px; background-color: #FFF8F2;
+    <div class="container" style="max-width:800px; background-color: #FFF8F2;
 font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
         <!-- Adding in top padding: https://www.w3schools.com/cssref/pr_padding-top.php -->
         <div class="row" style="padding-top: 15px">
@@ -110,7 +110,7 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
             <!-- Setting a position-relative class here allows us to place the map's legend
             on top of the map itself. See https://getbootstrap.com/docs/5.0/utilities/position/ -->
             <div class="position-relative mt-2">
-                    <div id="choropleth_map" style="height:425px;"></div>
+                    <div id="choropleth_map" style="height:450px;"></div>
                     
                 <!-- The following class places our custom CSS-based legend at the right center
             of the map. Overlaying the legend and map eliminates the need 
@@ -128,7 +128,7 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
         However, I found that the logo would still get cut off here--so I added the 'sm' tag back in.-->
             <div class="col-9 align-self-end mb-2" 
             style="text-align:left; font-size:15.3px; color:#2A2A2A">
-                <div id='map-caption'>Source: American Community Survey 2023 5-year<br>estimates from IPUMS.
+                <div id='map-caption'>Source: American Community Survey 2023<br>5-year estimates from IPUMS.
                 </div>
             </div>
             <div class="col-3 align-self-end mb-2" style="text-align: right">
@@ -786,7 +786,7 @@ function wrap_strings(raw_string, max_line_length) {
 
             let layout = {
                 map: {
-                    center: { lon: -95, lat: 37 }, zoom: 2.8,
+                    center: { lon: -95, lat: 37 }, zoom: 3.1,
                     style: "https://tiles.openfreemap.org/styles/bright",
                     // The following code (based on https://plotly.com/javascript/choropleth-maps/)
                     // adds state outlines to our choropleth map.
