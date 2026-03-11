@@ -1,1 +1,0 @@
-[Click here](https://ifstudies.github.io/gmm/) to view the HTML maps stored within this repository.
