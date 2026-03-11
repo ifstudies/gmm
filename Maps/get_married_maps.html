@@ -112,12 +112,13 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                 <!-- The bootstrap-specific select code shown here was based on the example(s) at
   https://getbootstrap.com/docs/5.3/forms/select/#default .-->
                 <select class="form-select" style="text-align:left" id="sex-option" aria-label="Metric selection">
+                    <option value="Both">
+                        Both</option>   
                     <option value="Male">
                         Male</option>
                     <option value="Female">
                         Female</option>
-                    <option value="Both">
-                        Both</option>      
+   
                 </select>
             </div>
             
@@ -136,12 +137,15 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                 <!-- The bootstrap-specific select code shown here was based on the example(s) at
   https://getbootstrap.com/docs/5.3/forms/select/#default .-->
                 <select class="form-select" style="text-align:left" id="age-option" aria-label="Metric selection">
+                    <option value="All">
+                        22-39</option> 
+                        <!-- Note: labeling this with the actual range, rather than 'All', will
+                        help prevent viewers from misinterpreting this category to include ages 0-120+.-->
                     <option value="22_to_29">
                         22-29</option>
                     <option value="30_to_39">
                         30-39</option>
-                    <option value="All">
-                        All</option>      
+
                 </select>
             </div>
 
@@ -713,6 +717,9 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                         selected_metric+'_total_weight']
                 }).groupby(["STATEFP_MSA"]).col([selected_metric+'_1_weight',
                     selected_metric+'_total_weight']).sum();
+
+                // Calculating a weighted percentage by dividing the sum of our '1_weight' values by those of the
+                // 'total_weight' values:
                 // Danfo.js automatically added '_sum' suffixes to the two fields
                 // we passed to .sum(), so we'll need to incorporate those suffixes
                 // into the following code.
