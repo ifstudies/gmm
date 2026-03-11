@@ -104,8 +104,8 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
 
 
         <div class="row">
-            <div class="col-2"><b>Sex:</b></div>
-            <div class="col-3" style="justify-content:left">
+            <div class="col-md-2"><b>Sex:</b></div>
+            <div class="col-md-2" style="justify-content:left">
                 <!-- Select tag is based on https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select-->
                 <!-- This page was also very helpful for linking <select> choices to our iframe's src value via JavaScript:
  https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event#select_element-->
@@ -125,10 +125,11 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
             this will then cause this label to appear to the far right on mobile devices, which we definitely
             don't want. -->
             
-            <div class="col-1"></div> 
-            <!-- The previous line adds a gap in between the Sex and Age categories.-->
-            <div class="col-1" style="justify-content:left"><b>Age:</b></div>
-            <div class="col-3" style="justify-content:left">
+            <div class="col-md-1"></div> 
+            <!-- The previous line adds a gap in between the Sex and Age categories. Note that, when viewed on mobile,
+            it will end up disappearing (which is ideal, since we won't need it in that case.)-->
+            <div class="col-md-1" style="justify-content:left"><b>Age:</b></div>
+            <div class="col-md-3" style="justify-content:left">
                 <!-- Select tag is based on https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select-->
                 <!-- This page was also very helpful for linking <select> choices to our iframe's src value via JavaScript:
  https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event#select_element-->
