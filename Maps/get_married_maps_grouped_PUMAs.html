@@ -793,16 +793,23 @@ Regions are grouped PUMAs with at least 500,000 individuals each.
             // create_rgb_int_array() and create_stepped_colormap(). (These are both available within
             // charting_code.py.)
 
+            opacity_str = '0.75' // Expressed as a float (from 0 to 1), even though the other values
+            // are integers that can range from 0 to 255.
+            // Note: I confirmed that this opacity value also affects the colors on the legend.
+            // (The legend background is opaque, which is why you don't see map tiles show through
+            // the colors.)
+
+
             let color_list =
 
-                ['rgb(28, 22, 120)',
-                    'rgb(67, 63, 133)',
-                    'rgb(107, 104, 146)',
-                    'rgb(146, 145, 159)',
-                    'rgb(179, 168, 160)',
-                    'rgb(204, 173, 148)',
-                    'rgb(230, 178, 136)',
-                    'rgb(255, 183, 124)'];
+                ['rgba(28, 22, 120, '+opacity_str+')',
+                    'rgba(67, 63, 133, '+opacity_str+')',
+                    'rgba(107, 104, 146, '+opacity_str+')',
+                    'rgba(146, 145, 159, '+opacity_str+')',
+                    'rgba(179, 168, 160, '+opacity_str+')',
+                    'rgba(204, 173, 148, '+opacity_str+')',
+                    'rgba(230, 178, 136, '+opacity_str+')',
+                    'rgba(255, 183, 124, '+opacity_str+')'];
 
             color_count = color_list.length
 
