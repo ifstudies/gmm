@@ -26,5 +26,5 @@
 
 [MSA-level choropleth maps](/Maps/get_married_maps_msa_only.html)
 
-
+[*Link to repository*](https://github.com/ifstudies/gmm)
 
