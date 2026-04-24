@@ -8,8 +8,7 @@
 
 [Grouped-PUMA-level choropleth maps](/Maps/get_married_maps_grouped_PUMAs.html)
 
-    (These maps are based on clusters of PUMAs with at least 500,000 individuals each.)
-
+* These maps are based on clusters of PUMAs with at least 500,000 individuals each.
 
 [State/MSA-level choropleth maps](/Maps/get_married_maps_msa_state.html)
 
