@@ -3133,6 +3133,9 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                 ];
 
                 let layout = {
+                    // Setting uirevision to true prevents the map's zoom and central coordinates
+                    // from resetting whenever the user updates it.
+                    uirevision: 'true', // Based on https://plotly.com/javascript/uirevision/
                     map: {
                         center: { lon: -95, lat: 37 }, zoom: 3.1,
                         style: "https://tiles.openfreemap.org/styles/positron",
