@@ -2,21 +2,27 @@
 
 ## Main maps
 
-[PUMA-level bubble maps](/Maps/get_married_maps.html)
+[PUMA-level bubble maps with choropleth background](Maps/get_married_maps_bubble_with_choropleth_overlay.html)
 
-* These maps show the number of singles, by PUMA, who meet certain criteria. Geographic clustering is applied at father-out zoom levels in order to better highlight especially-dense regions.
+* These maps use circles to visualize the number of singles, by PUMA, who meet certain criteria. Geographic clustering is applied at father-out zoom levels in order to better highlight especially-dense regions.
 
-[PUMA-level bubble maps (with no clustering)](/Maps/get_married_maps_no_grouping.html)
+* These maps show county-level ideology and religion data in the background. 
+
+* Users can choose to view *only* the circle or bubble components of these maps.
 
 [PUMA-level choropleth maps](/Maps/get_married_maps_puma_choropleth.html)
 
-* These maps show percentage, ratio, and median-income values that are better represented in choropleth form.
-
-[County-level choropleth maps](/Maps/get_married_maps_county_choropleth.html)
-
-* This page shows county-level data on religious adherence and 2024 vote shares for Harris and Trump.
+* These maps show PUMA-level percentage, ratio, and median-income values that are better represented in choropleth form.
 
 ## Alternative designs
+
+[PUMA-level bubble maps (with no choropleth background)](/Maps/get_married_maps.html)
+
+* These maps show the number of singles, by PUMA, who meet certain criteria. Geographic clustering is applied at father-out zoom levels in order to better highlight especially-dense regions.
+
+[PUMA-level bubble maps (with no choropleth background *and* no clustering)](/Maps/get_married_maps_no_grouping.html)
+
+[County-level choropleth maps (with no circles)](/Maps/get_married_maps_county_choropleth.html)
 
 [Choropleth-based alternative to PUMA-level bubble maps](/Maps/get_married_maps_as_choropleth.html)
 
