@@ -88,10 +88,9 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
 
                     <option value="pct_married">
                         Percent married</option>
-
                     <!-- Median income (MI) -->
                     <option value="MI">
-                        Singles' median income</option>
+                        Republican vote share</option>
 
                     <!-- The following variables will *not* take the sex category
                     into account (since they are all based on data for both
@@ -3049,9 +3048,9 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                 // While our quantile-based legend uses a discrete/stepped colorscale,
                 // our linear legend will instead use a continuous colorscale with
                 // a distinct midpoint color.
-                colorscale = [[0, 'rgb(28, 22, 120)'],
-                [0.5, 'rgb(166, 166, 166)'],
-                [1, 'rgb(255, 183, 124)']];
+                colorscale = [[0, 'rgba(28, 22, 120, ' + opacity_str + ')'],
+                [0.5, 'rgba(166, 166, 166, ' + opacity_str + ')'],
+                [1, 'rgba(255, 183, 124, ' + opacity_str + ')']];
 
 
                 z_val = metric_values;

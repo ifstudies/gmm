@@ -12,6 +12,10 @@
 
 * These maps show percentage, ratio, and median-income values that are better represented in choropleth form.
 
+[County-level choropleth maps](/Maps/get_married_maps_county_choropleth.html)
+
+* This page shows county-level data on religious adherence and 2024 vote shares for Harris and Trump.
+
 ## Alternative designs
 
 [Choropleth-based alternative to PUMA-level bubble maps](/Maps/get_married_maps_as_choropleth.html)
