@@ -2,7 +2,7 @@
 
 ## Main maps
 
-[PUMA-level bubble maps with choropleth background](Maps/get_married_maps_bubble_with_choropleth_overlay.html)
+[PUMA-level bubble maps with choropleth background](Maps/get_married_maps.html)
 
 * These maps use circles to visualize the number of singles, by PUMA, who meet certain criteria. Geographic clustering is applied at father-out zoom levels in order to better highlight especially-dense regions.
 
@@ -16,7 +16,7 @@
 
 ## Alternative designs
 
-[PUMA-level bubble maps (with no choropleth background)](/Maps/get_married_maps.html)
+[PUMA-level bubble maps (with no choropleth background)](/Maps/get_married_maps_bubble.html)
 
 * These maps show the number of singles, by PUMA, who meet certain criteria. Geographic clustering is applied at father-out zoom levels in order to better highlight especially-dense regions.
 
