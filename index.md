@@ -1,20 +1,20 @@
 # Drafts of maps
 
-## Main maps
+## Main map
 
 [PUMA-level bubble maps with choropleth background](Maps/get_married_maps.html)
 
 * These maps use circles to visualize the number of singles, by PUMA, who meet certain criteria. Geographic clustering is applied at father-out zoom levels in order to better highlight especially-dense regions.
 
-* These maps show county-level ideology and religion data in the background. 
+* These maps show PUMA-level percentages or ratios, *or* county-level ideology and religion data, in the background. 
 
-* Users can choose to view *only* the circle or bubble components of these maps.
-
-[PUMA-level choropleth maps](/Maps/get_married_maps_puma_choropleth.html)
-
-* These maps show PUMA-level percentage, ratio, and median-income values that are better represented in choropleth form.
+* Users can also choose to view *only* the circle or choropleth components of these maps.
 
 ## Alternative designs
+
+[Grouped-PUMA-level choropleth maps](/Maps/get_married_maps_grouped_PUMAs.html)
+
+* These maps are an alternative version of the main maps that use grouped PUMAs (with at least 500,000 individuals each) rather than individual PUMAs.
 
 [PUMA-level bubble maps (with no choropleth background)](/Maps/get_married_maps_bubble.html)
 
@@ -28,9 +28,6 @@
 
 * These maps show income and education data, among other metrics, in percentage form.
 
-[Grouped-PUMA-level choropleth maps](/Maps/get_married_maps_grouped_PUMAs.html)
-
-* These maps are based on clusters of PUMAs with at least 500,000 individuals each.
 
 [State/MSA-level choropleth maps](/Maps/get_married_maps_msa_state.html)
 
