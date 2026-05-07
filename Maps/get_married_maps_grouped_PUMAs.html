@@ -4545,12 +4545,12 @@ let lat_lon_boundaries = {
                 // Specifying the source and annotation text values for the caption:
 
                 const lat_lon_cluster_annotation_text = "Each circle \
-represents the number of singles in PUMAs whose representative point \
+represents the number of singles in PUMA groups whose representative point \
 falls within the grid surrounding the circle. Scales of circles vary \
 between, but not within, zoom levels.";
 
                 const puma_cluster_annotation_text = "Each circle represents \
-the number of singles in a given PUMA. Scales of circles vary between, \
+the number of singles in a given grouped PUMA. Scales of circles vary between, \
 but not within, zoom levels.";
 
                 // The following variable used to be called 'circle_source_text',
@@ -5768,7 +5768,7 @@ Retrieved from Harvard Dataverse.";
                     if ((['circles_and_choropleth', 'circles_only'].includes(
                         selected_display_option)) & (cluster_type == 'lat_lon_rounded')) {
                         subtitle = "Zoom in to view counts for individual \
-Public Use Microdata Areas (PUMAs)."}
+Public Use Microdata Area (PUMA) groups."}
 
                     subtitleElement.innerHTML = "<i>" + subtitle + "</i>";
 
