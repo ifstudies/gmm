@@ -2,11 +2,15 @@
 
 ## Main map
 
-[PUMA- and County-level choropleth maps](Maps/get_married_maps_puma_and_county_choropleth.html)
+[PUMA- and County-level choropleth maps](Maps/get_married_maps.html)
 
 * These maps show PUMA-level percentages or ratios, *or* county-level ideology and religion data, in the background. 
 
 ## Alternative designs
+
+[Grouped PUMA- and County-level choropleth maps](Maps/get_married_maps_grouped_puma_and_county_choropleth.html)
+
+* This map is equivalent to the main map except that it uses grouped PUMAs (with at least 500,000 people each) rather than individual PUMAs.
 
 [Bubble maps with choropleth background layer](Maps/get_married_maps_bubble_with_choropleth_overlay.html)
 
