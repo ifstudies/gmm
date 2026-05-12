@@ -119,7 +119,7 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                         <!-- Sex-specific percentages and median incomes: -->
 
                         <option value="pct_married">
-                            Percent married</option>
+                            Percentage married</option>
                         <!-- Median income (MI) -->
                         <option value="MI">
                             Singles' median income</option>
@@ -201,12 +201,12 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
   https://getbootstrap.com/docs/5.3/forms/select/#default .-->
                     <select class="form-select" style="text-align:left" id="choropleth-sex-option"
                         aria-label="Metric selection">
+                        <option value="Both">
+                            Both</option>                        
                         <option value="Female">
                             Female</option>
                         <option value="Male">
                             Male</option>
-                        <option value="Both">
-                            Both</option>
                     </select>
                 </div>
 
@@ -224,8 +224,8 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
   https://getbootstrap.com/docs/5.3/forms/select/#default .-->
                     <select class="form-select" style="text-align:left" id="choropleth-age-option"
                         aria-label="Metric selection">
-                        <option value="18_to_39">
-                            18-39</option>
+                        <option value="25_to_39">
+                            25-39</option>
                         <option value="18_to_24">
                             18-24</option>
                         <option value="25_to_34">
@@ -234,8 +234,9 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                             35-39</option>
                         <option value="18_to_34">
                             18-34</option>
-                        <option value="25_to_39">
-                            25-39</option>
+                        <option value="18_to_39">
+                            18-39</option>
+
                     </select>
                 </div>
 
@@ -6106,7 +6107,7 @@ Retrieved from Harvard Dataverse.";
                     ["pct_donald_j_trump", "2024 Trump vote share"],
                     ["pct_trump_minus_pct_harris", "% Trump - % Harris (2024)"],
                     ["pct_married_in_past_year", "Percentage of never-before-married adults married in past year"],
-                    ["pct_married", "Percent married"],
+                    ["pct_married", "Percentage married"],
                     ["pct_aa_or_higher", "Percentage of singles with an associate's degree or higher"],
                     ["pct_ba_or_higher", "Percentage of singles with a bachelor's degree or higher"],
                     ["pct_employed_full_time", "Percentage of singles employed full-time"],
