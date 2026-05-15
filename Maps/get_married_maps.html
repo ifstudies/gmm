@@ -98,7 +98,7 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                             Percentage of singles with a bachelor's degree or higher</option>
 
                         <option value="pct_employed_full_time">
-                            Percentage of singles employed full-time</option>
+                            Percentage of singles employed full time</option>
 
                         <option value="pct_income_at_least_60k">
                             Percentage of singles earning $60K+</option>
@@ -119,7 +119,7 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                         <!-- Sex-specific percentages and median incomes: -->
 
                         <option value="pct_married">
-                            Percentage married</option>
+                            Percent married</option>
                         <!-- Median income (MI) -->
                         <option value="MI">
                             Singles' median income</option>
@@ -6099,48 +6099,62 @@ Retrieved from Harvard Dataverse.";
 
 
 
-
+                
+                // Note: Our map titles will incorporate age and sex data (where applicable) in order
+                // to make them more intuitive. The easiest way to do so will likely be to add
+                // a 'DEMOGRAPHICGROUP' string to the entries which will then get replaced
+                // by the age and sex values selected by the user.
 
                 const choropleth_title_map = new Map(
-                    [["adherents_as_pct_of_population", "Religious adherents as % of population"],
+                    [
+                    ["adherents_as_pct_of_population", "Religious adherents as % of population"],
                     ["pct_kamala_d_harris", "2024 Harris vote share"],
                     ["pct_donald_j_trump", "2024 Trump vote share"],
                     ["pct_trump_minus_pct_harris", "% Trump - % Harris (2024)"],
-                    ["pct_married_in_past_year", "Percentage of never-before-married adults married in past year"],
-                    ["pct_married", "Percentage married"],
-                    ["pct_aa_or_higher", "Percentage of singles with an associate's degree or higher"],
-                    ["pct_ba_or_higher", "Percentage of singles with a bachelor's degree or higher"],
-                    ["pct_employed_full_time", "Percentage of singles employed full-time"],
-                    ["pct_income_at_least_60k", "Percentage of singles earning $60K+"],
-                    ["MI", "Singles' median income"],
+                    ["pct_married_in_past_year", "Percentage of never-before-married DEMOGRAPHICGROUP married in past year"],
+                    ["pct_married", "Percentage of DEMOGRAPHICGROUP who are married"],
+                    ["pct_aa_or_higher", "Percentage of single DEMOGRAPHICGROUP with an associate's degree or higher"],
+                    ["pct_ba_or_higher", "Percentage of single DEMOGRAPHICGROUP with a bachelor's degree or higher"],
+                    ["pct_employed_full_time", "Percentage of single DEMOGRAPHICGROUP employed full time"],
+                    ["pct_income_at_least_60k", "Percentage of single DEMOGRAPHICGROUP earning $60K+"],
+                    ["MI", "Median income of single DEMOGRAPHICGROUP"],
 
                     ["RATIO_single_men_to_single_women_among_men_women_ages_", 
-                    "Ratio of single men to single women"],
+                    "Ratio of single men to single women among DEMOGRAPHICGROUP"],
 
                     ["RATIO_single_men_with_ba_to_single_women_among_men_women_ages_", 
-                    "Ratio of single men with a BA to single women"],
+                    "Ratio of single men with a BA to single women among DEMOGRAPHICGROUP"],
                     ["RATIO_single_men_fte_to_single_women_among_men_women_ages_", 
-                    "Ratio of single, full-time employed men to single women"],
+                    "Ratio of single, full-time employed men to single women among DEMOGRAPHICGROUP"],
                     ["RATIO_single_men_60k_to_single_women_among_men_women_ages_", 
-                    "Ratio of single men earning $60K+ to single women"],
+                    "Ratio of single men earning $60K+ to single women among DEMOGRAPHICGROUP"],
 
                     ["RATIO_single_men_to_single_women_with_ba_among_men_women_ages_",
-                    "Ratio of single men to single women with a BA"],
+                    "Ratio of single men to single women with a BA among DEMOGRAPHICGROUP"],
                     ["RATIO_single_men_to_single_women_fte_among_men_women_ages_",
-                    "Ratio of single men to single, full-time-employed women"],
+                    "Ratio of single men to single, full-time-employed women among DEMOGRAPHICGROUP"],
                     ["RATIO_single_men_to_single_women_60k_among_men_women_ages_",
-                    "Ratio of single men to single women earning $60K+"],
+                    "Ratio of single men to single women earning $60K+ among DEMOGRAPHICGROUP"],
                     
                     ["RATIO_single_men_with_ba_to_single_women_with_ba_among_men_women_ages_", 
-                    "Ratio of single men with a BA to single women with a BA"],
+                    "Ratio of single men with a BA to single women with a BA among DEMOGRAPHICGROUP"],
                     ["RATIO_single_men_fte_to_single_women_fte_among_men_women_ages_", 
-                    "Ratio of single, full-time employed men to single, full-time employed women"],
+                    "Ratio of single, full-time employed men to single, full-time employed women among DEMOGRAPHICGROUP"],
                     ["RATIO_single_men_60k_to_single_women_60k_among_men_women_ages_", 
-                    "Ratio of single men earning $60K+ to single women earning $60K+"],
+                    "Ratio of single men earning $60K+ to single women earning $60K+ among DEMOGRAPHICGROUP"],
                     
                     ["RATIO_single_male_single_female_median_income_among_men_women_ages_", 
-                    "Median income ratio of single men to single women"]
+                    "Median income ratio of single men to single women among DEMOGRAPHICGROUP"]
                     ]);
+
+                // The following map will allow choropleth-sex-option values
+                // to get translated into terms that are more comaptible with our
+                // title setup.
+                const sex_map_for_title = new Map ([
+                ["Both", "adults"],
+                ["Female", "women"],
+                ["Male", "men"]
+            ]);
 
                 // In order to simplify the updateMap() function, I moved much of 
                 // its code into updateChoroplethMap(). The latter will update
@@ -6162,11 +6176,17 @@ Retrieved from Harvard Dataverse.";
                 let max_bin_val_array = [];
                 let round_value = 0;
                 let choropleth_metric_for_title = "";
-                let wrapped_choropleth_metric_for_title = "";
                 let ratio_selected = false;
                 let selected_choropleth_field = "";
                 let choropleth_region_type = "";
-
+                let selected_choropleth_sex_option = "";
+                let selected_choropleth_age_option = "";
+                let updated_choropleth_metric_for_title = ""; // This variable will be used
+                // both within our hover-label *and* title-generation
+                // code.
+                let updated_wrapped_choropleth_metric_for_title = "";
+                let threshold_array = []; // This array will store linear 
+                    // data thresholds for labeling purposes.
 
                 // Defining functions that will update relevant data for choropleth
                 // and bubble maps:
@@ -6177,8 +6197,8 @@ Retrieved from Harvard Dataverse.";
 
                 {
                     // Choropleth-specifc values:
-                    let selected_choropleth_sex_option = choroplethSexOptionElement.value;
-                    let selected_choropleth_age_option = choroplethAgeOptionElement.value;
+                    selected_choropleth_sex_option = choroplethSexOptionElement.value;
+                    selected_choropleth_age_option = choroplethAgeOptionElement.value;
                     selected_choropleth_metric = metricOptionElement.value;
                     selected_color = colorOptionElement.value;
 
@@ -6281,8 +6301,42 @@ Retrieved from Harvard Dataverse.";
                     // the title to take certain age and sex categories into account).
                     choropleth_metric_for_title = choropleth_title_map.get(
                         selected_choropleth_metric);
-                    wrapped_choropleth_metric_for_title = wrap_strings(
-                        choropleth_metric_for_title.replace('Percentage', '%'), 28);
+
+                // Adding age and/or sex data into this title:
+                let demographic_group = "";
+                    // Determining which demographic group to incorporate into the title:
+
+                let choropleth_age_for_title = selected_choropleth_age_option.replace("_to_", "-");
+                // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+                let choropleth_sex_for_title = sex_map_for_title.get(selected_choropleth_sex_option);
+                
+                if (ratio_selected == true) // In this case, only ages will be needed.
+                
+
+                {demographic_group = (
+        "adults ages " + choropleth_age_for_title);}
+                    else
+
+                    {
+                        console.log("Selected choropleth sex option:",selected_choropleth_sex_option);
+                    
+                        console.log("choropleth_sex_for_title:",choropleth_sex_for_title);
+                    demographic_group = (
+        choropleth_sex_for_title + " ages " + choropleth_age_for_title);
+                    }
+
+                    // For variables (e.g. political and religious data) that don't have
+                    // any age/sex breakdowns, the following code won't make any changes
+                    // to their existing corresponding titles (as they don't contain any
+                    // 'DEMOGRAPHICGROUP' field).
+                    updated_choropleth_metric_for_title = choropleth_metric_for_title.replace("DEMOGRAPHICGROUP",
+                    demographic_group);
+
+
+
+
+                    wrapped_updated_choropleth_metric_for_title = wrap_strings(
+                        updated_choropleth_metric_for_title.replace('Percentage', '%'), 28);
 
                     // Determining how much to round our metrics within legends and tooltips:
 
@@ -6301,8 +6355,7 @@ Retrieved from Harvard Dataverse.";
                     let max_val = d3.max(choropleth_metric_values)
                     let min_max_range = max_val - min_val
 
-                    let threshold_array = [] // This array will store linear 
-                    // data thresholds for labeling purposes.
+                    threshold_array = [];
 
                     let colorscale = [];
                     // Resetting these elements so that push() calls later on don't simply
@@ -6515,8 +6568,9 @@ Retrieved from Harvard Dataverse.";
                         type: "choroplethmap", locations: df_choropleth_data[region_id_col].values,
                         z: z_val,
                         geojson: choropleth_boundaries,
-                        hovertemplate: region_name + ": <b>%{" + wrapped_region_field + "}</b><br>" + wrapped_choropleth_metric_for_title +
-                            ": <b>%{z:." + round_value + "f}</b>" + "<extra></extra>",
+                        hovertemplate: region_name + ": <b>%{" + wrapped_region_field 
+                        + "}</b><br>" + wrapped_updated_choropleth_metric_for_title +
+                        ": <b>%{z:." + round_value + "f}</b>" + "<extra></extra>",
                         // Based on https://plotly.com/javascript/reference/choroplethmap/#choroplethmap-zmin
                         // and StackOverflow user christian's response at
                         // https://stackoverflow.com/a/75752633/13097194
@@ -6704,20 +6758,15 @@ Retrieved from Harvard Dataverse.";
                     }
 
 
-
                         legendElement.innerHTML = (labels.join('<br>'));
   
-
                     // Determining what title to present: (This gets more complex with multiple layers, 
                     // as we'll want to reference each of these layers within the title.)
 
+                    
 
-                    let metric_for_title = "" // Default option in case none of the following 
-                    // if statements are triggered (though this would represent an error)
 
-                    metric_for_title = choropleth_metric_for_title;
-
-                    titleElement.innerHTML = "<b>" + metric_for_title + "</b>";
+                    titleElement.innerHTML = "<b>" + updated_choropleth_metric_for_title + "</b>";
 
 
                     // Updating the subtitle: (It's currently blank, but this code may get updated
