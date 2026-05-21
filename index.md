@@ -4,7 +4,7 @@
 
 [PUMA- and County-level choropleth maps](Maps/get_married_maps.html)
 
-* These maps show PUMA-level percentages or ratios, *or* county-level ideology and religion data, in the background. 
+* These maps show PUMA-level percentages or ratios, *or* county-level ideology and religion data, in the background. A corresponding table is provided below each map. 
 
 ## Alternative designs
 
