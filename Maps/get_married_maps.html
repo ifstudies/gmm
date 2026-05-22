@@ -65,7 +65,7 @@ https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Y
         }
 
         /* Note: the following code specifies the style for the color squares that
-        // will be incorporated into the legend.*/
+        will be incorporated into the legend.*/
         .legendtext i {
             width: 18px;
             height: 18px;
@@ -74,6 +74,21 @@ https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Y
             opacity: 1;
 
         }
+
+        /* Configuring our table's style: 
+        Based on https://stackoverflow.com/questions/10974703/applying-css3-style-to-specific-id ,
+        https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Tables ,
+        and my charting_code.py script (for Python-based datatables)
+        */
+        /* .gmm_dt {
+            th {background-color: #ffe2cb;}
+        } */
+
+        th {background-color: #ffe2cb;}
+        
+
+        
+
     </style>
 
 </head>
@@ -298,11 +313,14 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                  Based on: https://datatables.net/manual/installation
                  (The table will be empty here since the exact data that it shows will depend 
                    on the options selected by the viewer.)
+                Class specifications are based on 
+                https://datatables.net/manual/styling/classes .
+
                     -->
                 <div class="row justify-content-center mt-3">
                     <div class="col">
                     <div>
-                    <table id = "gmm_dt" class="display">
+                    <table id = "gmm_dt" class="row-border hover">
                     </table>
                     </div>
                 </div>
