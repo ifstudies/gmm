@@ -105,14 +105,22 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
             </div>
 
             <div class="row" style="padding-top: 15px">
-                <div class="col-md-2"><b>Metric:</b></div>
-                <div class="col-md-8" style="justify-content:left">
+                <div class="col" style="justify-content:left">
                     <!-- Select tag is based on https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select-->
                     <!-- This page was also very helpful for linking <select> choices to our iframe's src value via JavaScript:
  https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event#select_element-->
                     <!-- The bootstrap-specific select code shown here was based on the example(s) at
   https://getbootstrap.com/docs/5.3/forms/select/#default .-->
-                    <select class="form-select" style="text-align:left" id="choropleth-metric-option"
+                      <label>
+                        <!-- Had added  class="d-inline-block (from https://stackoverflow.com/a/48614171/13097194) 
+                        but this ended up not being necessary. -->
+                    <b>Metric:&nbsp&nbsp&nbsp</b>
+                      </label>
+                      <!-- Parts of the following select-menu code came from
+                       Sandra Willford at https://stackoverflow.com/a/48614171/13097194 .
+                       They allow the label and select menu to appear within the same line (provided
+                       that the screen is wide enough). -->
+                    <select class="form-control d-inline-block" style="width: auto; text-align:left" id="choropleth-metric-option"
                         aria-label="Metric selection">
 
                         
@@ -150,7 +158,9 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                             Ratio of single men with a BA to single women </option>
 
                         <option value="RATIO_single_men_fte_to_single_women_among_men_women_ages_">
-                            Ratio of single, full-time-employed men to single women</option>
+                            <!-- Adding some additional non-breaking spaces to the longest
+                            option name helps make the boxes appear less cramped. -->
+                            Ratio of single, full-time-employed men to single women&nbsp&nbsp</option>
                         
                         <option value="RATIO_single_men_60k_to_single_women_among_men_women_ages_">
                         Ratio of single men earning $60K+ to single women</option>
@@ -165,7 +175,8 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                         <option value="adherents_as_pct_of_population">
                             Religious adherents as % of population</option>
 
-                        <option value="pct_trump_minus_pct_harris">% Trump - % Harris (2024)</option>
+                        <option value="pct_trump_minus_pct_harris">
+                            % Trump - % Harris (2024)</option>
                         </optgroup>
 
 
@@ -174,74 +185,63 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
             </div>
 
 
-            <!-- We won't add any padding to this div; that way, 
-            when choropleth-option-note's inner HTML is blank, this element
-            will remain completley hidden. -->
-            <div class="row">
-                <div class="col">
-
-                    <div id='choropleth-option-note'></div>
-                </div>
-            </div>
-
-            <div class="row mt-2">
+            <div class="row mt-2" id = 'sex-option-row'>
 
                 <!-- text-align: right would move the Age range label closer to its corresponding options. However,
             this will then cause this label to appear to the far right on mobile devices, which we definitely
             don't want. -->
+            </div>
 
-                <div class="col-md-2"><b>Sex:</b></div>
-                <div class="col-md-2" style="justify-content:left">
+                <div class="row mt-2">
+
+                <div class="col-md-2" style="justify-content:left" id = 'choropleth-sex-option-block'>
                     <!-- Select tag is based on https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select-->
                     <!-- This page was also very helpful for linking <select> choices to our iframe's src value via JavaScript:
  https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event#select_element-->
                     <!-- The bootstrap-specific select code shown here was based on the example(s) at
   https://getbootstrap.com/docs/5.3/forms/select/#default .-->
-                    <select class="form-select" style="text-align:left" id="choropleth-sex-option"
+  <label><b>Sex:&nbsp&nbsp&nbsp</b>
+                    <select class="form-control d-inline-block" 
+                    style="width: auto; text-align:left" id="choropleth-sex-option"
                         aria-label="Metric selection">
                         <option value="Both">
                             Both</option>                        
                         <option value="Female">
-                            Female</option>
+                            Female&nbsp&nbsp</option>
                         <option value="Male">
                             Male</option>
                     </select>
+                </label>
                 </div>
 
-
-                <div class="col-md-1"></div>
-                <!-- The previous line adds a gap in between the Sex and Age categories. Note that, when viewed on mobile,
-            it will end up disappearing (which is ideal, since we won't need it in that case.)-->
-
-                <div class="col-md-1" style="justify-content:left"><b>Age:</b></div>
-                <div class="col-md-2" style="justify-content:left">
+                <div class="col-md-2" style="justify-content:left" id = 'choropleth-age-option-block'>
                     <!-- Select tag is based on https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select-->
                     <!-- This page was also very helpful for linking <select> choices to our iframe's src value via JavaScript:
  https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event#select_element-->
                     <!-- The bootstrap-specific select code shown here was based on the example(s) at
   https://getbootstrap.com/docs/5.3/forms/select/#default .-->
-                    <select class="form-select" style="text-align:left" id="choropleth-age-option"
+  <label><b>Age:&nbsp&nbsp&nbsp</b>
+                    <select class="form-control d-inline-block" style="width: auto; text-align:left" id="choropleth-age-option"
                         aria-label="Metric selection">
                         <option value="22_to_39">
-                            22-39</option>
+                            22-39&nbsp&nbsp</option>
                         <option value="22_to_29">
                             22-29</option>
                         <option value="30_to_39">
                             30-39</option>
                     </select>
+                </label>
                 </div>
-
-            </div>
-
-            <div class="row mt-2">
-                <div class="col-md-2"><b>Color by:</b></div>
-                <div class="col-md-5" style="justify-content:left">
-                    <select class="form-select" style="text-align:left" id="color-option" aria-label="Metric selection">
+                
+                <div class="col-md-4" style="justify-content:left" id = 'color-option-block'>
+                    <label><b>Color by:&nbsp&nbsp&nbsp</b>
+                    <select class="form-control d-inline-block" style="width: auto; text-align:left" id="color-option" aria-label="Metric selection">
                         <option value="quantiles">Quantiles</option>
-                        <option value="original_values_stepped">Original values (stepped)</option>
-                        <option value="original_values">Original values (continuous)</option>
+                        <option value="original_values_stepped">Original values</option>
                     </select>
+                </label>
                 </div>
+            </div>
 
 
                 <!-- The mt argument allows for a bit more space between elements. -->
@@ -6569,17 +6569,6 @@ Retrieved from Harvard Dataverse.";
                 let choroplethAgeOptionElement = document.getElementById('choropleth-age-option');
                 choroplethAgeOptionElement.addEventListener("change", updateMap);
 
-                // This element will clarify that certain menu items (age, sex, etc.)
-                // won't have any effect for certain choropleth metrics.
-                let choroplethOptionNoteElement = document.getElementById('choropleth-option-note');
-
-
-            // Defining initial and final elements of the choroplethOptionNoteElement's
-            // inner HTML:
-            // Padding-top is based on https://stackoverflow.com/a/15438809/13097194
-            const choropleth_option_note_start = "<div style='padding-top: 5px'><i>";
-            const choropleth_option_note_end = "</div></i>";
-
 
                 function wrap_strings(raw_string, max_line_length = 30) {
                     // This function creates a wrapped copy of a string for inclusion within
@@ -7108,34 +7097,6 @@ Retrieved from Harvard Dataverse.";
 
                     }
 
-
-                    else if (selected_color == 'original_values') {
-
-                        // Calculating equally-spaced values for our linear-based legend:
-                        // (The quantile-based legend will show two items within each value,
-                        // whereeas the linear-based one will just show a single item per value.
-                        // Therefore, we can include one fewer item within the linear array.)
-                        // (An alternative approach would be to create a stepped array for the 
-                        // linear one--but this approach should work fine for now.)
-
-                        for (let i = 0; i < color_count; i++)
-
-                            threshold_array.push(
-                                min_val + (i / (color_count - 1)) * (min_max_range));
-
-
-                        // While our quantile-based legend uses a discrete/stepped colorscale,
-                        // our linear legend will instead use a continuous colorscale with
-                        // a distinct midpoint color.
-                        colorscale = [[0, 'rgba(28, 22, 120, ' + opacity_str + ')'],
-                        [0.5, 'rgba(166, 166, 166, ' + opacity_str + ')'],
-                        [1, 'rgba(255, 183, 124, ' + opacity_str + ')']];
-
-
-                        z_val = choropleth_metric_values;
-
-                    }
-
                     // Note: the number of colors you'll need for your colorscale will be one less
                     // than the number of items in the array above. Thus, for an
                     // 8-value quantile array, you'll need 7 distinct colors.
@@ -7410,14 +7371,6 @@ for (let i = 0; i < choropleth_metric_values.length; i++) {
                         }
                     }
 
-                    else if (selected_color == 'original_values') {
-                        for (let i = color_count - 1; i >= 0; i--) {
-
-                            labels.push(`<i style="background:${color_list[i]}"></i>&nbsp${Number(threshold_array[i].toFixed(legend_round_value))}`);
-
-                        }
-                    }
-
 
                         legendElement.innerHTML = (labels.join('<br>'));
   
@@ -7436,34 +7389,41 @@ for (let i = 0; i < choropleth_metric_values.length; i++) {
 
                     subtitleElement.innerHTML = "<i>" + subtitle + "</i>";
 
+            // Making any previously-hidden option blocks visible:
+            document.getElementById('choropleth-sex-option-block').style.display='block';
+            document.getElementById('choropleth-age-option-block').style.display='block';
+            document.getElementById('color-option-block').style.display='block';
 
-            // Adding notes that, depending on what metric is selected,
-            // certain options won't have any effect:
+            // Hiding inapplicable option menus based on the metric selected by the user:
 
-            if (["adherents_as_pct_of_population",
-            "pct_kamala_d_harris", "pct_donald_j_trump"].includes(
+            if (["adherents_as_pct_of_population"].includes(
                  selected_choropleth_metric))
-            {choroplethOptionNoteElement.innerHTML = (
-                choropleth_option_note_start+"Note: the Sex and Age options \
-will not have any effect for this metric."
-+choropleth_option_note_end);
+                 // This metric shows data for all ages and sexes, so we should hide
+                 // the sex and age menus in order not to confuse viewers.
+            {
+            // Hides the sex-option block, as it won't have any effect for
+            // ratios. 
+            // Based on Josh Crozier's StackOverflow answer at 
+            // https://stackoverflow.com/a/21070237/13097194
+            document.getElementById('choropleth-sex-option-block').style.display='none';
+            document.getElementById('choropleth-age-option-block').style.display='none';
             }
 
             else if (selected_choropleth_metric == "pct_trump_minus_pct_harris")
-            {choroplethOptionNoteElement.innerHTML = (
-                choropleth_option_note_start+"Note: the Sex, Age, and Color by options \
-will not have any effect for this metric."
-+choropleth_option_note_end);
+            // For this metric, we not only lack age- and sex-specific data, but we're also
+        // using a custom fixed colorscale--so we'll hide the color option as well.
+            {
+            document.getElementById('choropleth-sex-option-block').style.display='none';
+            document.getElementById('choropleth-age-option-block').style.display='none';
+            document.getElementById('color-option-block').style.display='none';
             }
 
             else if (ratio_selected == true) {
-
-                choroplethOptionNoteElement.innerHTML = (
-                choropleth_option_note_start+"Note: the Sex option \
-will not have any effect when a ratio-based metric is selected."
-+choropleth_option_note_end);}
-            else
-        { choroplethOptionNoteElement.innerHTML = "";}
+            // Ratios will incorporate data from both sexes, so we can disable the sex option
+            // block as well. (We do have data for different ages, though, so we can
+            // retain the age menu.)
+            document.getElementById('choropleth-sex-option-block').style.display='none';
+               }
 
                     // Updating the caption:
                     // Note: We won't add the 'Source:' prefix directly within source values,
