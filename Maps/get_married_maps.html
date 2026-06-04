@@ -7472,12 +7472,20 @@ Retrieved from Harvard Dataverse.";
                     // care of these revisions.)
                     // We should only apply filters if the user selected a valid metric.
                     // (no_filter is the default.)
-                    if (selected_filter_metric != 'no_filter') {
 
 
                     // Making any previously-hidden option blocks visible:
                     document.getElementById('filter-'+filter_id+'-sex-option-block').style.display='block';
                     document.getElementById('filter-'+filter_id+'-age-option-block').style.display='block';
+
+                    let selected_filter_warning = document.getElementById('filter-'+filter_id+'-warning');
+
+                    // Clearing out out any existing warning from our filter-warning field:
+                    selected_filter_warning.innerHTML = "";
+
+
+                    if (selected_filter_metric != 'no_filter') {
+
 
                     // We've already created variables for each filter 
                     // (e.g. filter1AgeOptionElement); however, using getElementById 
@@ -7497,7 +7505,7 @@ Retrieved from Harvard Dataverse.";
                 
                     selected_filter_sex_option = document.getElementById('filter-'+filter_id+'-sex-option').value;
                     selected_filter_age_option = document.getElementById('filter-'+filter_id+'-age-option').value;
-                    selected_filter_warning = document.getElementById('filter-'+filter_id+'-warning');
+  
 
                     // Determining the column name that corresponds to our first filter *and*
                     // our selected age and sex options (if applicable):
@@ -7555,9 +7563,6 @@ Retrieved from Harvard Dataverse.";
 //selected_filter_'+filter_id+'_field, and selected_filter_'+filter_id+'_value:', 
 //                    selected_filter_metric, selected_filter_field, selected_filter_value);
 
-
-                    // Clearing out out any existing warning from our filter-warning field:
-                    selected_filter_warning.innerHTML = "";
 
                     //console.log("Columns within DataFrame:", df.columns)
                     //console.log("selected filter field present within DF:", df.columns.includes(selected_filter_field))
