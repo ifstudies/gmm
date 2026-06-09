@@ -7105,23 +7105,23 @@ Retrieved from Harvard Dataverse.";
                 // even though the other values are integers that can range from 0 to 255.
                 // Note: I confirmed that this opacity value also affects the colors on the legend.
                 // (The legend background is opaque, which is why you don't see map tiles show through
-                // the colors.)
+                // the colors--and why the exact color values within the legend may differ from those
+                // within the map.)
 
                 let color_list = [
-                // Note: We're now using distinct colors for the top (and, possibly, bottom)
-                // quartiles in order to help these regions stand out.
+
+                'rgba(28, 22, 120, ' + opacity_str + ')',
+                'rgba(103, 101, 145, ' + opacity_str + ')',
+                'rgba(128, 127, 153, ' + opacity_str + ')',
+                'rgba(153, 153, 162, ' + opacity_str + ')',
+                'rgba(174, 168, 162, ' + opacity_str + ')',
+                'rgba(190, 171, 155, ' + opacity_str + ')',
+                'rgba(206, 174, 147, ' + opacity_str + ')',
+                'rgba(255, 183, 124, ' + opacity_str + ')',
+
+                    // 'rgba(186, 83, 203, ' + opacity_str + ')', // Alternative 1st-quintile color
+                    //'rgba(92, 131, 36, ' + opacity_str + ')', // Alternative final-quantile color
             
-                    'rgba(186, 83, 203, ' + opacity_str + ')',
-                    //'rgba(28, 22, 120, ' + opacity_str + ')', // Regular 1st-quantile color
-                    'rgba(67, 63, 133, ' + opacity_str + ')',
-                    'rgba(107, 104, 146, ' + opacity_str + ')',
-                    'rgba(146, 145, 159, ' + opacity_str + ')',
-                    'rgba(179, 168, 160, ' + opacity_str + ')',
-                    'rgba(204, 173, 148, ' + opacity_str + ')',
-                    'rgba(230, 178, 136, ' + opacity_str + ')',
-                
-                    'rgba(92, 131, 36, ' + opacity_str + ')',
-                    //'rgba(255, 183, 124, ' + opacity_str + ')' // Regular final-quantile color
                 ]
 
                 let color_count = color_list.length
