@@ -240,7 +240,9 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
 
 <!-- The value of the filter-display checkbox will determine whether or not to display
 the following div.-->
-<div id = "metric-filter-section">
+<div id = "metric-filter-section" style="display:none"> 
+    <!-- display:none hides these items by default. (The user can then display them by checking
+     the 'Show filters' box. -->
 
 
     <!-- HTML for filter #1: -->
@@ -715,11 +717,11 @@ the following div.-->
 
 
                 function showFilters()
-                {
-                    // This approach does *not* work; instead, 
+                {console.log("Calling showFilters().");
+                    // show_filters_value = showFiltersElement.value; // This approach 
+                    // does *not* work; instead, 
                     // you'll need to use the .checked property (as shown below)
                     // to determine whether or not a box has been checked.
-                    // show_filters_value = showFiltersElement.value;
                 show_filters_checked = showFiltersElement.checked;
                     //console.log("show_filters_checked:",show_filters_checked);
                 if (show_filters_checked == true)
@@ -727,10 +729,6 @@ the following div.-->
                 else
                 {document.getElementById('metric-filter-section').style.display='none';}
                 }
-
-                showFilters(); // Applies our preferred filter-visibility setting when the
-                // map is first loaded
-
 
 
                 // Importing PUMA boundaries:
