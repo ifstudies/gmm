@@ -104,8 +104,8 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                 <h4 class="col" style="text-align: center"><b>Get Married Maps</b></h4>
             </div>
 
-            <div class="row" style="padding-top: 15px">
-                <div class="col-lg-4 " style="justify-content:left">
+            <div class="row">
+                <div class="col-xxl-4 pt-3" style="justify-content:left">
                     <!-- Select tag is based on https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select-->
                     <!-- This page was also very helpful for linking <select> choices to our iframe's src value via JavaScript:
  https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event#select_element-->
@@ -182,7 +182,7 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                     </select>
                 </div>
 
-                <div class="col-lg-1" style="justify-content:left" id = 'choropleth-sex-option-block'>
+                <div class="col-xxl-1 pt-3" style="justify-content:left" id = 'choropleth-sex-option-block'>
   <label><b>Sex:&nbsp&nbsp&nbsp</b>
                     <select class="form-control" 
                     style="width: auto; text-align:left" id="choropleth-sex-option"
@@ -197,23 +197,29 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                 </label>
                 </div>
 
-                <div class="col-lg-1" style="justify-content:left" id = 'choropleth-age-option-block'>
+                <div class="col-xxl-1 pt-3" style="justify-content:left" 
+                id = 'choropleth-age-option-block'>
   <label><b>Age:&nbsp&nbsp&nbsp</b>
                     <select class="form-control" 
-                    style="width: auto; text-align:left" id="choropleth-age-option"
-                        aria-label="Metric selection">
-                        <option value="22_to_39">
-                            22-39&nbsp&nbsp</option>
+                    style="width: auto; text-align:left" 
+                    id="choropleth-age-option"
+                    aria-label="Metric selection">
                         <option value="22_to_29">
                             22-29</option>
                         <option value="30_to_39">
                             30-39</option>
+                        <option value="22_to_39" selected>
+                            <!-- Using 'selected' to set an option other than the first 
+within the list as the default. Based on
+https://www.geeksforgeeks.org/html/how-to-set-the-default-value-for-an-html-select-element/  -->
+                        All (22-39)&nbsp&nbsp</option>
                     </select>
                 </label>
                 </div>
                 
-
-<div class="col-lg-2" style="justify-content:left">
+<!-- The padding-top code here pushes this box down in order to center it vertically with 
+the metric, sex, and age items. -->
+<div class="col-xxl-2 px-xxl-5 pt-xxl-5 pt-3" style="justify-content:left">
 <!-- Checkbox that determines whether to show or hide filters: -->
 <!-- Based on: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox -->
 <div><input class="form-check-input" type="checkbox" name = 'filter-display' id = "show-filters"/>
@@ -6950,8 +6956,7 @@ let grouped_puma_boundaries =
                 const choropleth_religion_source_text = "US Religion Census \
 (2020) from the Association of Statisticians of American Religious Bodies."
 
-                const choropleth_ideology_source_text = "County-level \
-presidential election returns (2024) from MIT Election Data and Science Lab. \
+                const choropleth_ideology_source_text = "2024 presidential election returns from MIT Election Data and Science Lab. \
 Retrieved from Harvard Dataverse.";
 
 
@@ -7090,16 +7095,23 @@ Retrieved from Harvard Dataverse.";
                 // the colors--and why the exact color values within the legend may differ from those
                 // within the map.)
 
+                // The following color values were calculated within colorscale_generation.ipynb in 
+                // 2026-02-25_get_married_maps/colorscale_generation.ipynb . 
+                // /.
+                // 
+
                 let color_list = [
 
-                'rgba(28, 22, 120, ' + opacity_str + ')',
-                'rgba(103, 101, 145, ' + opacity_str + ')',
-                'rgba(128, 127, 153, ' + opacity_str + ')',
-                'rgba(153, 153, 162, ' + opacity_str + ')',
-                'rgba(174, 168, 162, ' + opacity_str + ')',
-                'rgba(190, 171, 155, ' + opacity_str + ')',
-                'rgba(206, 174, 147, ' + opacity_str + ')',
-                'rgba(255, 183, 124, ' + opacity_str + ')',
+'rgba(28, 22, 120, ' + opacity_str + ')',
+'rgba(102, 99, 145, ' + opacity_str + ')',
+'rgba(120, 118, 151, ' + opacity_str + ')',
+'rgba(138, 137, 157, ' + opacity_str + ')',
+'rgba(157, 156, 163, ' + opacity_str + ')',
+'rgba(172, 167, 163, ' + opacity_str + ')',
+'rgba(184, 169, 158, ' + opacity_str + ')',
+'rgba(196, 172, 152, ' + opacity_str + ')',
+'rgba(208, 174, 146, ' + opacity_str + ')',
+'rgba(255, 183, 124, ' + opacity_str + ')',
 
                     // 'rgba(186, 83, 203, ' + opacity_str + ')', // Alternative 1st-quintile color
                     //'rgba(92, 131, 36, ' + opacity_str + ')', // Alternative final-quantile color
@@ -7830,6 +7842,17 @@ for PUMAs rather than actual PUMA-level data. Thus, the results should be interp
 
                     let customdata = df_choropleth_data[wrapped_region_field].values;
 
+                    // Determining how to refer to values within the label: (We originally used a wrapped
+                    // version of the title, but in order to simplify the tooltips and reduce redundancy,
+                    // we'll use an abbreviated term here instead.
+                    // Note: This setup assumes that all non-ratio values are percentages; update this logic
+                    // in the future if this changes.
+
+                    let metric_label = 'Percentage'
+
+                    if (ratio_selected == true)
+                    {metric_label = 'Ratio'}
+
                     choropleth_map_data = {
                         customdata: customdata,
                         type: "choroplethmap", locations: df_choropleth_data[region_id_col].values,
@@ -7846,7 +7869,7 @@ for PUMAs rather than actual PUMA-level data. Thus, the results should be interp
                         // metric being visualized. (You can create another map for this task.)
                         // You might also want to include a custom name for the Trump-Harris %.
                         hovertemplate: "<b>%{customdata}</b><br>" 
-                        + "Value: <b>%{z:." + tooltip_round_value + "f}</b>" + "<extra></extra>",
+                        + metric_label + ": <b>%{z:." + tooltip_round_value + "f}</b>" + "<extra></extra>",
                         // Based on https://plotly.com/javascript/reference/choroplethmap/#choroplethmap-zmin
                         // and StackOverflow user christian's response at
                         // https://stackoverflow.com/a/75752633/13097194
@@ -8172,19 +8195,30 @@ for (let i = 0; i < filtered_choropleth_metric_values.length; i++) {
                         if (selected_choropleth_field == "adherents_as_pct_of_population") {
                             choropleth_source_component = choropleth_religion_source_text;
                             choropleth_annotation_component = choropleth_county_annotation_text;
+                        choropleth_annotation_component = "This map shows county-level data.<br>";   
                         }
 
                         else if (["pct_trump_minus_pct_harris", "pct_kamala_d_harris",
                             "pct_donald_j_trump"].includes(selected_choropleth_metric)) {
                             choropleth_source_component = choropleth_ideology_source_text;
                             choropleth_annotation_component = choropleth_county_annotation_text;
+                            choropleth_annotation_component = "This map shows county-level data.<br>";
                         }
 
                         else // In this case, a PUMA-level choropleth metric was selected. Currently,
                         // all such metrics derive from IPUMS data.
                         {
                             choropleth_source_component = ipums_source_text;
-                            // The choropleth annotation will remain blank here.
+                            // Clarifying in the caption when a metric is shown at 
+                            // the grouped-PUMA level:
+                            if (choropleth_region_type == 'PUMA_grouped')
+                        {choropleth_annotation_component = "The regions shown in this map \
+are grouped Public Use Microdata Areas (PUMAs). Each grouped PUMA includes at least \
+500,000 people.<br>";}
+                        else if (choropleth_region_type == 'PUMA')
+                        {choropleth_annotation_component = "The regions shown in this map are \
+Public Use Microdata Areas (PUMAs).<br>";}
+
                         }
 
                     
