@@ -204,15 +204,15 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                     style="width: auto; text-align:left" 
                     id="choropleth-age-option"
                     aria-label="Metric selection">
-                        <option value="22_to_29">
-                            22-29</option>
-                        <option value="30_to_39">
-                            30-39</option>
                         <option value="22_to_39" selected>
                             <!-- Using 'selected' to set an option other than the first 
 within the list as the default. Based on
 https://www.geeksforgeeks.org/html/how-to-set-the-default-value-for-an-html-select-element/  -->
                         All (22-39)&nbsp&nbsp</option>
+                        <option value="22_to_29">
+                            22-29</option>
+                        <option value="30_to_39">
+                            30-39</option>
                     </select>
                 </label>
                 </div>
@@ -7106,23 +7106,25 @@ Retrieved from Harvard Dataverse.";
 
 // 5-color list:
 
-// 'rgba(28, 22, 120, ' + opacity_str + ')',
-// 'rgba(120, 118, 151, ' + opacity_str + ')',
-// 'rgba(166, 166, 166, ' + opacity_str + ')',
-// 'rgba(196, 172, 152, ' + opacity_str + ')',
-// 'rgba(255, 183, 124, ' + opacity_str + ')',
-
-// 10-color list:                
 'rgba(28, 22, 120, ' + opacity_str + ')',
-'rgba(102, 99, 145, ' + opacity_str + ')',
 'rgba(120, 118, 151, ' + opacity_str + ')',
-'rgba(138, 137, 157, ' + opacity_str + ')',
-'rgba(157, 156, 163, ' + opacity_str + ')',
-'rgba(172, 167, 163, ' + opacity_str + ')',
-'rgba(184, 169, 158, ' + opacity_str + ')',
+'rgba(166, 166, 166, ' + opacity_str + ')',
 'rgba(196, 172, 152, ' + opacity_str + ')',
-'rgba(208, 174, 146, ' + opacity_str + ')',
 'rgba(255, 183, 124, ' + opacity_str + ')',
+
+// 10-color list: (Helps the very highest-and lowest areas for a given
+// metric stand out)
+
+// 'rgba(28, 22, 120, ' + opacity_str + ')',
+// 'rgba(102, 99, 145, ' + opacity_str + ')',
+// 'rgba(120, 118, 151, ' + opacity_str + ')',
+// 'rgba(138, 137, 157, ' + opacity_str + ')',
+// 'rgba(157, 156, 163, ' + opacity_str + ')',
+// 'rgba(172, 167, 163, ' + opacity_str + ')',
+// 'rgba(184, 169, 158, ' + opacity_str + ')',
+// 'rgba(196, 172, 152, ' + opacity_str + ')',
+// 'rgba(208, 174, 146, ' + opacity_str + ')',
+// 'rgba(255, 183, 124, ' + opacity_str + ')',
 
                     // 'rgba(186, 83, 203, ' + opacity_str + ')', // Alternative 1st-quintile color
                     //'rgba(92, 131, 36, ' + opacity_str + ')', // Alternative final-quantile color
