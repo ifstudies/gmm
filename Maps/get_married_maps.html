@@ -639,12 +639,18 @@ the following div.-->
 
         <!-- The following div wraps all chart content (e.g. the title, subtitle (if any), map, logo, and annotation)
          within a single div so that we can assign uniform color and padding options. This could probably also be achieved
-         by adding similar values to all individual elements.
-         Adding a padding-top value to this div itself did not work very well; therefore, I instead modified the padding-top
-         value of the title.-->
-<div style="background-color: #FFF8F2; padding-left: 30px; padding-right:30px; padding-top:0px; padding-bottom:15px">
-                <!-- The mt argument allows for a bit more space between elements. -->
-                <div class="row mt-4" style="text-align:left; font-size:27px; padding-top:15px">
+         by adding similar values to all individual elements.-->
+<!-- <div style="background-color: #FFF8F2; padding-left: 30px; padding-right:30px; padding-top:0px; padding-bottom:15px"> -->
+    <!-- Note: px-xxl-4 and px-3 create a horizontal buffer in between the chart content and the rest of
+     the page. (Since this buffer doesn't need to be as wide for narrower screens, I'm using a value of 4 for the largest displays
+     and a value of 3 for other ones.
+     You could also use ps-xxl-4 and pe-xxl-4 (but not pl-xxl-4 and pr-xxl-4, which appear to no longer work; see
+     https://stackoverflow.com/questions/69301335/bootstrap-padding-left-and-right-is-not-working . 
+     For some reason, the chart will look more uniform if a smaller top-buffer value is used.-->
+<div class = "mt-4 px-xxl-4 px-3 pb-xxl-4 pb-3 pt-xxl-3 pt-2" style="background-color: #FFF8F2">
+                <!-- The mt argument allows for a bit more space between elements. pt-xll-3 and pt-2 were added in to 
+                create more spacing between the map and the preceding content.-->
+                <div class="row" style="text-align:left; font-size:27px">
                     <div class="col">
                         <div id="map_title"></div>
                     </div>
@@ -676,10 +682,10 @@ the following div.-->
                     <!-- Not specifying a size after the column numbers allows the items to appear side by side
         even on very small screens. (See https://www.w3schools.com/bootstrap4/bootstrap_grid_xsmall.asp) 
         However, I found that the logo would still get cut off here--so I added the 'sm' tag back in.-->
-                    <div class="col-sm-9 align-self-end mb-3" style="text-align:left; font-size:15.3px; color:#2A2A2A">
+                    <div class="col-sm-9 align-self-end" style="text-align:left; font-size:15.3px; color:#2A2A2A">
                         <div id='map-caption'></div>
                     </div>
-                    <div class="col-sm-3 align-self-end mb-3" style="text-align: right">
+                    <div class="col-sm-3 align-self-end" style="text-align: right">
                         <img style="width:106px" src="https://ifs.imgix.net/ifs-admin/resources/admin\
 /ifs-logo-family-studies-blue-1x-transparent.png" alt="IFS Logo">
                     </div>
