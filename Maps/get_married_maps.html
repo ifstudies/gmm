@@ -86,18 +86,17 @@ https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Y
 
         th {background-color: #ffe2cb;}
         
-
-        
-
     </style>
 
 </head>
 
-<body style="background-color: #FFF8F2">
+<!-- <body style="background-color: #FFFFFF"> -->
+<body>
 
     <!-- For embedded setups, try an 800-pixel container -->
-    <div class="container" style="background-color: #FFF8F2;
-font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
+    <!-- <div class="container" style="background-color: #FFF8F2;-->
+     <div class="container" style="font-family: Lato, Helvetica, 
+sans-serif; color: #121212; font-size:17px">
         <!-- Adding in top padding: https://www.w3schools.com/cssref/pr_padding-top.php -->
 
             <div class="row" style="padding-top: 15px">
@@ -116,11 +115,14 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                         but this ended up not being necessary. -->
                     <h5>Metric&nbsp&nbsp&nbsp</h5>
                       </label>
+                      <!-- Note: In order for the d-inline-block code to successfully
+                       place both labels and buttons on the same line, you need to end
+                       the label before introducing the <select> tag. -->
                       <!-- Parts of the following select-menu code came from
                        Sandra Willford at https://stackoverflow.com/a/48614171/13097194 .
                        They allow the label and select menu to appear within the same line (provided
                        that the screen is wide enough). -->
-                    <select class="form-control" style="width: auto; text-align:left" id="choropleth-metric-option"
+                    <select class="form-control d-inline-block" style="width: auto; text-align:left" id="choropleth-metric-option"
                         aria-label="Metric selection">
 
                         <optgroup label = "Percentages">
@@ -182,10 +184,9 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                     </select>
                 </div>
 
-                <div class="col-xl-1 pt-3" style="justify-content:left" id = 'choropleth-sex-option-block'>
-  <label><h5>Sex&nbsp&nbsp&nbsp</h5>
-                    <select class="form-control" 
-                    style="width: auto; text-align:left" id="choropleth-sex-option"
+                <div class="col-xl-2 pt-3" style="justify-content:left" id = 'choropleth-sex-option-block'>
+  <label><h5>Sex&nbsp&nbsp&nbsp</h5></label>
+                    <select class="form-control d-inline-block" style="width: auto; text-align:left" id="choropleth-sex-option"
                         aria-label="Metric selection">
                         <option value="Both">
                             Both</option>                        
@@ -194,13 +195,13 @@ font-family: Lato, Helvetica, sans-serif; color: #121212; font-size:17px">
                         <option value="Male">
                             Male</option>
                     </select>
-                </label>
+                
                 </div>
-
-                <div class="col-xl-2 px-xl-5 pt-3" style="justify-content:left" 
+<!-- px-xl-5 -->
+                <div class="col-xl-2  pt-3" style="justify-content:left" 
                 id = 'choropleth-age-option-block'>
-  <label><h5>Age&nbsp&nbsp&nbsp</h5>
-                    <select class="form-control" 
+  <label><h5>Age&nbsp&nbsp&nbsp</h5></label>
+                    <select class="form-control d-inline-block" 
                     style="width: auto; text-align:left" 
                     id="choropleth-age-option"
                     aria-label="Metric selection">
@@ -214,14 +215,16 @@ https://www.geeksforgeeks.org/html/how-to-set-the-default-value-for-an-html-sele
                         <option value="30_to_39">
                             30-39</option>
                     </select>
-                </label>
+                
                 </div>
+            
                 
 <!-- pt-xl-5 pushes this box down in order to center it vertically with 
 the metric, sex, and age items. However, for smaller displays, this horizontal
 alignment isn't necessary, so we can use the same pt-3 value that we're using
 for other elements as well. -->
-<div class="col-xl-3 px-xl-5 pt-xl-5 pt-3" style="justify-content:left">
+<!-- pt-xl-5 -->
+<div class="col-xl-3 pt-4" style="justify-content:left">
 <!-- Checkbox that determines whether to show or hide filters: -->
 <!-- Based on: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox -->
 <div><input class="form-check-input" type="checkbox" name = 'filter-display' id = "show-filters"/>
@@ -634,9 +637,14 @@ the following div.-->
         </div>
         <!-- The previous div marks the end of the filter section. -->
 
-
+        <!-- The following div wraps all chart content (e.g. the title, subtitle (if any), map, logo, and annotation)
+         within a single div so that we can assign uniform color and padding options. This could probably also be achieved
+         by adding similar values to all individual elements.
+         Adding a padding-top value to this div itself did not work very well; therefore, I instead modified the padding-top
+         value of the title.-->
+<div style="background-color: #FFF8F2; padding-left: 30px; padding-right:30px; padding-top:0px; padding-bottom:15px">
                 <!-- The mt argument allows for a bit more space between elements. -->
-                <div class="row mt-4" style="text-align:left; font-size:27px">
+                <div class="row mt-4" style="text-align:left; font-size:27px; padding-top:15px">
                     <div class="col">
                         <div id="map_title"></div>
                     </div>
@@ -676,6 +684,7 @@ the following div.-->
 /ifs-logo-family-studies-blue-1x-transparent.png" alt="IFS Logo">
                     </div>
                 </div>
+            </div>
 
                 <!-- DataTable element:
                  Based on: https://datatables.net/manual/installation
@@ -7399,7 +7408,7 @@ Retrieved from Harvard Dataverse.";
                         //console.log("Length of choropleth_data_bins:", choropleth_data_bins.length);
 
                         for (let i = 0; i < choropleth_data_bins.length; i++) {
-                            //console.log("Length of data bin", i, "is: ", choropleth_data_bins[i].length)
+                            console.log("Length of data bin", i, "is: ", choropleth_data_bins[i].length)
                             if (choropleth_data_bins[i].length > 0) {
                                 // console.log("interpolated_min_bin_val_array[i]",interpolated_min_bin_val_array[i])
                                 // console.log("interpolated_max_bin_val_array[i]",interpolated_max_bin_val_array[i])
