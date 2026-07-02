@@ -180,7 +180,29 @@ sans-serif; color: #121212; font-size:17px">
                             % Trump - % Harris (2024)</option>
                         </optgroup>
 
+                    <!-- The following items are helpful for internal data checks. -->
+                    <!--
+                    <optgroup label="Extra items for debugging purposes">
 
+                    
+                    <option value="individual_puma_pct_married_in_past_year">
+                        (P) Percent married in past year</option>
+
+                        <option value="individual_puma_adherents_as_pct_of_population">
+                            (P) Religious adherents as % of population</option>
+
+                        <option value="individual_puma_pct_trump_minus_pct_harris">
+                            (P) % Trump - % Harris (2024)</option>
+
+                        <option value="grouped_puma_adherents_as_pct_of_population">
+                            (GP) Religious adherents as % of population</option>
+
+                        <option value="grouped_puma_pct_trump_minus_pct_harris">
+                            (GP) % Trump - % Harris (2024)</option>
+
+
+                    </optgroup>
+                -->
                     </select>
                 </div>
 
@@ -7414,7 +7436,7 @@ Retrieved from Harvard Dataverse.";
                         //console.log("Length of choropleth_data_bins:", choropleth_data_bins.length);
 
                         for (let i = 0; i < choropleth_data_bins.length; i++) {
-                            console.log("Length of data bin", i, "is: ", choropleth_data_bins[i].length)
+                            // console.log("Length of data bin", i, "is: ", choropleth_data_bins[i].length)
                             if (choropleth_data_bins[i].length > 0) {
                                 // console.log("interpolated_min_bin_val_array[i]",interpolated_min_bin_val_array[i])
                                 // console.log("interpolated_max_bin_val_array[i]",interpolated_max_bin_val_array[i])
@@ -7678,7 +7700,9 @@ for PUMAs rather than actual PUMA-level data. Thus, the results should be interp
                     // In order to reduce the amount of variance displayed for
                     // the '% married in the past year' metric, we'll display that
                     // data at the grouped-PUMA level.
-                    else if (selected_choropleth_metric == 'pct_married_in_past_year')
+                    else if (['pct_married_in_past_year', 'grouped_puma_adherents_as_pct_of_population',
+                        'grouped_puma_pct_trump_minus_pct_harris'].includes(selected_choropleth_metric)
+                    )
 
                     {choropleth_region_type = 'PUMA_grouped';}
 
@@ -7706,8 +7730,6 @@ for PUMAs rather than actual PUMA-level data. Thus, the results should be interp
                     // be equal. For PUMA-level maps, on the other hand, the field will often
                     // be based on both the selected metric *and* the user's age/sex options. (As a result,
                     // the following assignment will get revised later within this code.)
-
-                    selected_choropleth_field = selected_choropleth_metric;
                     
                     ratio_selected = false; // Will be applied for PUMA-level choropleth maps
                     let region_id_col = 'GEOID'; // Will be used to match regions within our regional-data
@@ -7740,23 +7762,36 @@ for PUMAs rather than actual PUMA-level data. Thus, the results should be interp
                         region_name = 'PUMA';}
 
                     
-                    // We could hard-code these values for the PUMA_grouped condition,
-                    // but this setup will prevent us from having to update such values
-                    // if we end up using grouped PUMAs for other variables as well.
-                    if (['PUMA_grouped', 'PUMA'].includes(choropleth_region_type))
-                        {
-                        // Determining the exact column within our wide dataset that corresponds
-                        // to the given set of PUMA-level choropleth metrics:
 
-                        selected_choropleth_field = "";
+                    // Replacing region specifiers within metric names (which were needed
+                    // in order to specify alternative datasets for those metrics)
+                    // with empty spaces
+                    // because those specifiers aren't present within the dataset, and thus wouldn't
+                    // get matched correctly to the following code.
+                    
+                    selected_choropleth_metric = selected_choropleth_metric.replace(
+                    "individual_puma_", "").replace("grouped_puma_", "")
 
-                        // Different variables will need to get parsed differently--though I could 
-                        // simplify this code a decent amount by renaming the variables in the original dataset
-                        // to make their syntax and capitalization more consistent.
-
-                        ratio_selected = false; // We'll use this variable to determine whether or not to display
+                    //console.log("Selected choropleth metric is:", selected_choropleth_metric)
+                    
+                    ratio_selected = false; // We'll use this variable to determine whether or not to display
                         // a notice about the Sex column (which won't get used for ratio-based metrics)
-    
+
+
+                    // Creating a new variable that will match an exact metric column within our dataset:
+
+                    selected_choropleth_field = selected_choropleth_metric; // This default setup will
+                    // work well for our political and ideology variables
+
+                    // Certain metrics will need age/sex specifiers appended to them in order for a match within
+                    // the dataset to be found; others (e.g. ratios) will need just age specifiers; 
+                    // and others (e.g. religion and ideology fields) shouldn't have any specifiers.
+
+                    if ((selected_choropleth_metric.includes("adherents") == false) & (
+                    selected_choropleth_metric.includes("minus_pct") == false)) // In this case, we're not
+                    // dealing with a religion or ideology variable, so we should add at least something
+                    // (either an age category alone, or both age and sex categories) to the end.
+                    {
 
                         if (selected_choropleth_metric.substring(0, 5) == "RATIO") {
                             // In this case, we'll simply add the age range (but not the sex)
@@ -7766,8 +7801,7 @@ for PUMAs rather than actual PUMA-level data. Thus, the results should be interp
                             ratio_selected = true;
                         }
 
-                        else // Non-ratio metrics for a particular sex and age-group combination
-
+                        else
                         {
                             selected_choropleth_field = selected_choropleth_metric + "_"
                                 + selected_choropleth_sex_option + "_" + selected_choropleth_age_option
@@ -7775,6 +7809,11 @@ for PUMAs rather than actual PUMA-level data. Thus, the results should be interp
 
                     }
 
+                    // If the first if statement returned false, selected_choropleth_field will continue
+                    // to match selected_choropleth_metric (which is the desired outcome for ideology
+                    // and religion variables)
+
+                    //console.log("Selected choropleth field is:", selected_choropleth_field)
 
                     let unfiltered_choropleth_metric_values = df_choropleth_data[selected_choropleth_field].values;
 
