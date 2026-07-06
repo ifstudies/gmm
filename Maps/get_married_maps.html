@@ -7183,6 +7183,40 @@ Retrieved from Harvard Dataverse.";
                 let political_color_count = political_color_list.length
 
 
+                // We can label legend entries as bin ranges (e.g. '13% to 17%'); 
+                // as intuitive qunitile descriptions (e.g. 'Highest', 'Higher', 'Average',
+                // 'Lower', and 'Lowest'; or as a combination of these two (e.g. 'Higher (13%-17%')).
+                // The following varibales will make it easier to change approaches as needed.
+
+                
+                // Options here are 'bin_descriptions'; 'percentage_ranges'; and 'descriptions_and_ranges'.
+                // Examples of each setup:
+                // bin_descriptions: "Highest"
+                // percentage_ranges: "63% to 82%"
+                // descriptions_and_ranges: "Highest (63% to 82%)"
+
+                // Uncomment a single line within the following three 
+                // lines in order to specify how to display labels
+                // (for maps other than the election-results one).
+
+                // const label_option = 'bin_descriptions'
+                const label_option = 'percentage_ranges'
+                // const label_option = 'descriptions_and_ranges'
+
+                // Specifying the labels that should be assigned to each label
+                // when 'bin_descriptions' is specified (or used, together with percentage
+                // values, within the labels when 'descriptions_and_ranges' is specified):
+                // (NOTE: These will need to be modified if you end up changing the number
+                // of bins. They're currently designed to be used for 5-bin (quintile-based)
+                // setups.
+
+                const quintile_bin_map = new Map([
+                    [4, 'Highest'],
+                    [3, 'Higher',],
+                    [2, 'Average',],
+                    [1, 'Lower'],
+                    [0, 'Lowest']
+                ]);
 
                 
                 // Note: Our map titles will incorporate age and sex data (where applicable) in order
@@ -8184,8 +8218,25 @@ for (let i = 0; i < filtered_choropleth_metric_values.length; i++) {
                             // we'll want to skip over bins that have 0 entries;
                             // otherwise, we'll end up with NaN values in our legend.
                             {
+
+                                let label = '' // Will be replaced with an actual label shortly
+
+                                if (label_option == 'bin_descriptions')
+                            {
+                                label = quintile_bin_map.get(i);
+                            }
+
+                                else if (label_option == 'percentage_ranges')
+{
                                 label = (Number(min_bin_val_array[i].toFixed(legend_round_value))
-                                    + " to " + Number(max_bin_val_array[i].toFixed(legend_round_value)))
+                                    + " to " + Number(max_bin_val_array[i].toFixed(legend_round_value)))}
+
+
+                                else // Covers the 'descriptions_and_ranges' category
+{
+                                    label = quintile_bin_map.get(i) + ' (' + (Number(min_bin_val_array[i].toFixed(legend_round_value))
+                                    + " to " + Number(max_bin_val_array[i].toFixed(legend_round_value))) + ')'}
+                            
                                 // The use of toFixed and Number allow numbers to be rounded to a specific
                                 // number of digits (e.g. 2 for ratio values and 0 for non-ratio values).
                                 // Based on Atif Ibrahim's response at https://stackoverflow.com/a/76986331/13097194
