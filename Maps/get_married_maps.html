@@ -7702,15 +7702,32 @@ metric. Please choose a different filter or metric.";
                         selected_filter_metric)) & (["adherents_as_pct_of_population", 
                         "pct_trump_minus_pct_harris"].includes(
                         selected_choropleth_metric) == false))
+
+
+
                 {
-                        selected_filter_warning.innerHTML = "This filter is based on weighted county-level averages \
+                        selected_filter_warning.innerHTML = "This filter is based on weighted county- and \
+house-district-level averages \
 for PUMAs rather than actual PUMA-level data. Thus, the results should be interpreted with caution.";}
 
-                    
+// Adding additional detail about Alaska for two different scenarios:
+
+                    if ((selected_choropleth_metric == "adherents_as_pct_of_population") & 
+                     (selected_filter_metric == "pct_trump_minus_pct_harris"))
+                {
+                        selected_filter_warning.innerHTML = "The election-result filter for Alaska is \
+based on weighted house-district-level averages for counties rather than actual county-level data. \
+Thus, the results for that state be interpreted with caution.";}
+
+                    if ((selected_choropleth_metric == "pct_trump_minus_pct_harris") &
+                     (selected_filter_metric == "adherents_as_pct_of_population"))
+                {
+                        selected_filter_warning.innerHTML = "Data for Alaska is not available for this metric/filter combination.";}
+
                     //console.log("DataFrame column for filter:")
                     //console.log(df[selected_filter_field].values);
 
-                console.log("selected_filter_comparison_option:", selected_filter_comparison_option);
+                // console.log("selected_filter_comparison_option:", selected_filter_comparison_option);
 
                     if (selected_filter_comparison_option == 'at_least')
 
